@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +40,9 @@ public class Controller {
 
     @PostMapping("/activities")
     public Activity createActivity(
-            @RequestParam(value = "title", required = true) @NotNull @Size(max = 100) String title,
-            @RequestParam(value = "summary", required = true) @NotNull @Size(max = 25) String summary,
-            @RequestParam(value = "description", required = true) @NotNull @Size(max = 200) String description,
+            @RequestParam(value = "title", required = true) @Size(min = 1, max = 100) String title,
+            @RequestParam(value = "summary", required = true) @Size(min = 1, max = 25) String summary,
+            @RequestParam(value = "description", required = true) @Size(min = 1, max = 200) String description,
             @RequestParam(value = "info", required = false) String info) {
 
         return activityService.createActivity(title, summary, description, info);
